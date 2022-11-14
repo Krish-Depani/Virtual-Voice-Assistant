@@ -1,0 +1,35 @@
+{"intents": [
+    {"tag": "joke",
+     "patterns": ["Tell me a joke", "I want to hear a joke", "Can you please tell me a joke", "Tell joke", "Please tell me joke"],
+     "responses": ["sure!", "OK", "Okay"]
+    },
+    {"tag": "news",
+     "patterns": ["Tell me news headlines", "what are today's top news", "Tell me top news headlines", "Tell news", "Please tell me news", "Please tell me news headlines", "What are today's news headlines", "Tell me some news"],
+     "responses": ["Getting latest news", "Okay", "Fetching news headlines"]
+    },
+    {"tag": "ip",
+     "patterns": ["What is my ip address", "Tell my ip", "Fetch my ip address", "Find my ip", "Find ip address", "Tell ip address", "Please find my ip", "Get ip address"],
+     "responses": ["Getting ip address", "Sure", "Okay", "Finding your ip address"]
+    },
+    {"tag": "movies",
+     "patterns": ["Find trending movies", "Get me some trending movies", "List some trending movies", "Search trending movies", "List movies which are trending"],
+     "responses": ["Finding trending movies", "Searching for trending movies", "Fetching Trending Movies", "Okay", "Sure"]
+    },
+    {"tag": "weather",
+    "patterns": ["What's weather the today", "Get weather report", "What's the weather forecast", "Get weather forecast", "Fetch the weather report", "Get today's weather details", "Find weather detail's", "Get weather information", "Fetch weather information", "Fetch weather forecast"],
+    "responses": ["Getting weather report", "Fetching weather details", "Getting you weather forecast", "Okay"]
+    },
+    {"tag": "internet_speedtest",
+    "patterns": ["Check my internet speed", "Get my internet speed", "Find my internet speed", "Check internet speed", "Fetch internet speed"],
+    "responses": ["Getting your internet speed", "Okay", "Sure!"]
+    },
+    {"tag": "system_stats",
+    "patterns": ["Get system resource information", "Fetch system resource consumption", "Get system resource consumption", "Get system stats", "Get system info"],
+    "responses": ["Getting system stats", "Gathering system stats", "Okay"]
+    },
+    {"tag": "image_generation",
+    "patterns": ["Generate image", "Create image", "Generate picture", "Create a pic", "Generate a picture", "Generate image from text"],
+    "responses": ["Generating image please wait.."]
+    }
+]
+}
