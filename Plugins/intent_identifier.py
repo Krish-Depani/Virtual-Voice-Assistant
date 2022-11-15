@@ -37,5 +37,3 @@ def chat(text):
             if i['tag'] == tag:
                 response = np.random.choice(i['responses'])
                 return tag, response
-
-print(chat("Get me some news"))

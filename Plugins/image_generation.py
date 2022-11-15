@@ -1,14 +1,19 @@
 import io
 import warnings
-
+from dotenv import load_dotenv
+import os
 from PIL import Image
 from stability_sdk import client
 import stability_sdk.interfaces.gooseai.generation.generation_pb2 as generation
 
+load_dotenv(dotenv_path='..\\Data\\.env')
+
+DREAMSTUDIO = os.getenv('DREAMSTUDIO_API')
+
 text = 'a biker on a path to heaven stars in background, hyper-realistic'
 
 stability_api = client.StabilityInference(
-    key='sk-3QeqTGswltCJpG9wfTAGNSMdb5ut6fqsKf4b1jdzCWxNppW6',
+    key=DREAMSTUDIO,
     verbose=True,
 )
 

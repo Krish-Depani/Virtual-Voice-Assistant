@@ -61,5 +61,3 @@ def tell_me_about(query):
 
 def get_map(query):
 	open_website(f'https://www.google.com/maps/search/{query}')
-
-open_specified_website('open netflix')
