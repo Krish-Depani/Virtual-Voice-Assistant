@@ -99,5 +99,3 @@ def get_popular_tvseries():
             print(title)
     except KeyError:
         return "Query Not Found"
-
-print(get_general_response('how are you'))
