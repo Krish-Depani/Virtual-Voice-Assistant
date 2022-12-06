@@ -1,35 +1,139 @@
-{"intents": [
-    {"tag": "joke",
-     "patterns": ["Tell me a joke", "I want to hear a joke", "Can you please tell me a joke", "Tell joke", "Please tell me joke"],
-     "responses": ["sure!", "OK", "Okay"]
-    },
-    {"tag": "news",
-     "patterns": ["Tell me news headlines", "what are today's top news", "Tell me top news headlines", "Tell news", "Please tell me news", "Please tell me news headlines", "What are today's news headlines", "Tell me some news"],
-     "responses": ["Getting latest news", "Okay", "Fetching news headlines"]
-    },
-    {"tag": "ip",
-     "patterns": ["What is my ip address", "Tell my ip", "Fetch my ip address", "Find my ip", "Find ip address", "Tell ip address", "Please find my ip", "Get ip address"],
-     "responses": ["Getting ip address", "Sure", "Okay", "Finding your ip address"]
-    },
-    {"tag": "movies",
-     "patterns": ["Find trending movies", "Get me some trending movies", "List some trending movies", "Search trending movies", "List movies which are trending"],
-     "responses": ["Finding trending movies", "Searching for trending movies", "Fetching Trending Movies", "Okay", "Sure"]
-    },
-    {"tag": "weather",
+{
+  "intents": [
+  {
+    "tag": "joke",
+    "patterns": ["Tell me a joke", "I want to hear a joke", "Can you please tell me a joke", "Tell joke", "Please tell me joke"],
+    "responses": ["sure!", "OK", "Okay"]
+  },
+  {
+    "tag": "news",
+    "patterns": ["Tell me news headlines", "what are today's top news", "Tell me top news headlines", "Tell news", "Please tell me news", "Please tell me news headlines", "What are today's news headlines", "Tell me some news"],
+    "responses": ["Getting latest news", "Okay", "Fetching news headlines"]
+  },
+  {
+    "tag": "ip",
+    "patterns": ["What is my ip address", "Tell my ip", "Fetch my ip address", "Find my ip", "Find ip address", "Tell ip address", "Please find my ip", "Get ip address"],
+    "responses": ["Getting ip address", "Sure", "Okay", "Finding your ip address"]
+  },
+  {
+    "tag": "movies",
+    "patterns": ["Find trending movies", "Get me some trending movies", "List some trending movies", "Search trending movies", "List movies which are trending"],
+    "responses": ["Finding trending movies", "Searching for trending movies", "Fetching Trending Movies", "Okay", "Sure"]
+  },
+  {
+    "tag": "weather",
     "patterns": ["What's weather the today", "Get weather report", "What's the weather forecast", "Get weather forecast", "Fetch the weather report", "Get today's weather details", "Find weather detail's", "Get weather information", "Fetch weather information", "Fetch weather forecast"],
     "responses": ["Getting weather report", "Fetching weather details", "Getting you weather forecast", "Okay"]
-    },
-    {"tag": "internet_speedtest",
-    "patterns": ["Check my internet speed", "Get my internet speed", "Find my internet speed", "Check internet speed", "Fetch internet speed"],
+  },
+  {
+    "tag": "internet_speedtest",
+    "patterns": ["Check my internet speed", "Get my internet speed", "Find my internet speed", "Check internet speed", "Fetch internet speed", "what is my internet speed"],
     "responses": ["Getting your internet speed", "Okay", "Sure!"]
-    },
-    {"tag": "system_stats",
-    "patterns": ["Get system resource information", "Fetch system resource consumption", "Get system resource consumption", "Get system stats", "Get system info"],
+  },
+  {
+    "tag": "system_stats",
+    "patterns": ["Get system resource information", "Fetch system resource consumption", "Get system resource consumption", "Get system stats", "what are the system stats", "retrieve system stats", "obtain system statistics"],
     "responses": ["Getting system stats", "Gathering system stats", "Okay"]
-    },
-    {"tag": "image_generation",
+  },
+  {
+    "tag": "image_generation",
     "patterns": ["Generate image", "Create image", "Generate picture", "Create a pic", "Generate a picture", "Generate image from text"],
     "responses": ["Generating image please wait.."]
-    }
-]
+  },
+  {
+    "tag": "system_info",
+    "patterns": ["Get system information", "fetch system information", "retrieve system information", "obtain system information", "get system info", "tell system specifications", "what are system specifications", "obtain system specs", "retrieve system specifications", "get system specs"],
+    "responses": ["getting system specs", "fetching system information", "okay"]
+  },
+  {
+    "tag": "email",
+    "patterns": ["Send an email", "can you send an email", "Can you please send an email", "send email"],
+    "responses": [""]
+  },
+  {
+    "tag": "select_text",
+    "patterns": ["select all the text", "select all given text", "select the text", "select all text", "select text"],
+    "responses": [""]
+  },
+  {
+    "tag": "copy_text",
+    "patterns": ["copy text", "copy all the text", "copy the given text", "copy all text"],
+    "responses": [""]
+  },
+  {
+    "tag": "paste_text",
+    "patterns": ["paste text", "paste all the text", "paste copied text", "paste the text copied", "paste the text copied previously"],
+    "responses": [""]
+  },
+  {
+    "tag": "delete_text",
+    "patterns": ["delete text", "delete selected text", "delete the text"],
+    "responses": [""]
+  },
+  {
+    "tag": "save_file",
+    "patterns": ["save file", "save the current file", "save the file", "save this file"],
+    "responses": [""]
+  },
+  {
+    "tag": "new_file",
+    "patterns": ["create new file", "open new file"],
+    "responses": [""]
+  }, 
+  {
+    "tag": "switch_tab",
+    "patterns": ["switch tab", "switch the tab", "switch to next tab"],
+    "responses": [""]
+  },
+  {
+    "tag": "close_tab",
+    "patterns": ["close tab", "close the tab", "close current tab", "close the current tab"],
+    "responses": [""]
+  },
+  {
+    "tag": "new_tab",
+    "patterns": ["open new tab", "open new tab in current window", "open the new tab", "create new tab"],
+    "responses": [""]
+  },
+  {
+    "tag": "close_window",
+    "patterns": ["close window", "close the window", "close the current window", "close current tab"],
+    "responses": [""]
+  },
+  {
+    "tag": "switch_window",
+    "patterns": ["switch window", "switch the window", "switch to next window"],
+    "responses": [""]
+  },
+  {
+    "tag": "minimize_window",
+    "patterns": ["minimize window", "minimize current window", "minimize the window", "minimize the current window"],
+    "responses": [""]
+  },
+  {
+    "tag": "maximize_window",
+    "patterns": ["maximize window", "maximize the current window", "maximize the window", "maximize current window"],
+    "responses": [""]
+  },
+  {
+    "tag": "screenshot",
+    "patterns": ["take screenshot", "take screenshot of current window", "take a screenshot"],
+    "responses": [""]
+  },
+  {
+    "tag": "stopwatch",
+    "patterns": ["start stopwatch", "start the stopwatch", "start the stopwatch"],
+    "responses": ["starting stopwatch", "starting the stopwatch", "okay"]
+  },
+  {
+    "tag": "wikipedia",
+    "patterns": ["tell me about virat kohli", "tell me something about barak obama", "tell me about president of india", "tell me about mukesh ambani", "tell me something about narendra modi", "tell me something about sardar patel", "tell something about quantum computing", "tell about python programming language", "tell something about india", "tell something about stock markets"],
+    "responses": ["fetching information", "getting information for you", "okay"]
+  },
+  {
+    "tag": "math",
+    "patterns": ["what is 10 + 10", "solve for 9 multiply 5", "what is 34 minus 456", "what is 34783 divided by 456", "solve for 9683 / 56", "what is 712 * 9", "what is 2034983 - 342344", "solve for 9 % 2", "what is 345 percentage of 12345", "what is sin of 45", "what is cos(90)", "what is tan 25", "what is log of 345", "what is root of 234", "what is root of 987", "what is sum of 345 and 234", "what is sum of 123 and 789", "what is sum of 765 and 9163", "what is difference of 234 and 5674", "what is difference of 345 and 165", "what is logarithm of 456 base 10", "what is log of 225", "what is log of 1987", "what is logarithm of 9876", "what is product of 34 and 345", "what is product of 873 and 2", "what is 34 multiply 234", "what is 12 multiply 8", "what is 12 divided by 7", "what is 45 + 34", "what is 23145 + 3456772", "what is 2347 - 23463", "what is 234 - 0", "what is 23476 * 3", "what is 6785760 * 1267340", "what is 23 / 8745", "what is 8765 / 56845"],
+    "responses": [""]
+  }
+  ]
 }

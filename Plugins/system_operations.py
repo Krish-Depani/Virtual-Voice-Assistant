@@ -31,6 +31,8 @@ class SystemTasks:
         self.keyboard.press(Key.backspace)
         self.keyboard.release(Key.backspace)
 
+    # TODO: create copy, paste and new file function
+
     def save(self, query, name):
         if "don't" in query:
             self.keyboard.press(Key.right)
