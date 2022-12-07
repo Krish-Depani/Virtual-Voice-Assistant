@@ -31,7 +31,24 @@ class SystemTasks:
         self.keyboard.press(Key.backspace)
         self.keyboard.release(Key.backspace)
 
-    # TODO: create copy, paste and new file function
+    def copy(self):
+        self.select()
+        self.keyboard.press(Key.ctrl)
+        self.keyboard.press('c')
+        self.keyboard.release('c')
+        self.keyboard.release(Key.ctrl)
+
+    def paste(self):
+        self.keyboard.press(Key.ctrl)
+        self.keyboard.press('v')
+        self.keyboard.release('v')
+        self.keyboard.release(Key.ctrl)
+
+    def new_file(self):
+        self.keyboard.press(Key.ctrl)
+        self.keyboard.press('n')
+        self.keyboard.release('n')
+        self.keyboard.release(Key.ctrl)
 
     def save(self, query, name):
         if "don't" in query:

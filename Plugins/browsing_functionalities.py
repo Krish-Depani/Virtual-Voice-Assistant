@@ -13,6 +13,7 @@ def googleSearch(query):
 	query = query.replace('image', '')
 	query = query.replace('search', '')
 	query = query.replace('show', '')
+	query = query.replace('google', '')
 	webbrowser.open("https://www.google.com/search?q=" + query)
 	return "Here you go..."
 
