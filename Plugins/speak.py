@@ -8,5 +8,5 @@ def speak(text):
     try:
         engine.say(text)
         engine.runAndWait()
-    except KeyboardInterrupt:
+    except KeyboardInterrupt or RuntimeError:
         return

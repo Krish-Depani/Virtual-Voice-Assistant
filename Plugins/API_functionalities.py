@@ -99,5 +99,3 @@ def get_popular_tvseries():
             print(title)
     except KeyError:
         return "Query Not Found"
-
-get_general_response('when is christmas')

@@ -4,8 +4,6 @@ import base64
 import googleapiclient.discovery
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from speak import speak
-from recognize import listen_audio
 
 # Get the path to the pickle file
 home_dir = os.path.expanduser('~')
