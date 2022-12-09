@@ -52,7 +52,7 @@ model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam', metrics=['accuracy'])
 
 model.summary()
-epochs = 700
+epochs = 500
 history = model.fit(padded_sequences, np.array(training_labels), epochs=epochs)
 # to save the trained model
 model.save("..\\Data\\chat_model")

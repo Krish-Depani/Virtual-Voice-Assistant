@@ -28,7 +28,7 @@ websites_dict = {
     "netflix": "https://netflix.com/",
     "amazon prime": "https://primevideo.com/",
     "whatsapp": "https://web.whatsapp.com/",
-    "telegram": "https://telegram.org/",
+    #"telegram": "https://telegram.org/",
     "hotstar": "https://www.hotstar.com/",
     "cricbuzz": "https://www.cricbuzz.com/",
     "google maps": "https://maps.google.com/",
@@ -37,8 +37,12 @@ websites_dict = {
     "nykaa": "https://www.nykaa.com/",
     "myntra": "https://www.myntra.com/",
     "amazon flex": "https://flex.amazon.in/",
-    "discord": "https://discord.com/",
+    #"discord": "https://discord.com/",
     "swiggy": "https://www.swiggy.com/",
     "zomato": "https://www.zomato.com/",
     "spotify": "https://open.spotify.com/"
 }
+lst = []
+for key in websites_dict.keys():
+    lst.append("open "+key)
+print(lst)

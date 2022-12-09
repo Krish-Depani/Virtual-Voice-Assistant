@@ -17,10 +17,13 @@ IPSTACK = os.getenv('IPSTACK_API')
 TMDB = os.getenv('TMDB_API')
 news = NewsApiClient(api_key=NEWS)
 
-def get_ip():
+def get_ip(_return=False):
     try:
         response = requests.get(f'http://api.ipstack.com/check?access_key={IPSTACK}').json()
-        speak(f'Your IP address is {response["ip"]}')
+        if _return:
+            return response
+        else:
+            speak(f'Your IP address is {response["ip"]}')
     except KeyboardInterrupt:
         return
     except requests.exceptions.RequestException:
@@ -45,9 +48,12 @@ def get_news():
     except requests.exceptions.RequestException:
         return "Request Error"
 
-def get_weather(city):
+def get_weather(city=''):
     try:
-        response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHERMAP}&units=metric').json()
+        if city:
+            response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHERMAP}&units=metric').json()
+        else:
+            response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={get_ip(True)["city"]}&appid={OPENWEATHERMAP}&units=metric').json()
         speak(f'It\'s {response["main"]["temp"]}° Celsius and {response["weather"][0]["main"]}\n'
               f'But feels like {response["main"]["feels_like"]}° Celsius\n'
               f'Wind is blowing at {round(response["wind"]["speed"] * 3.6, 2)}km/h\n'
@@ -67,7 +73,7 @@ def get_general_response(query):
     except KeyboardInterrupt:
         return
 
-def get_latest_movies():
+def get_popular_movies():
     try:
         response = requests.get(f"https://api.themoviedb.org/3/movie/popular?api_key={TMDB}&region=IN&sort_by=popularity.desc&"
                                 f"primary_release_year={datetime.date.today().year}").json()

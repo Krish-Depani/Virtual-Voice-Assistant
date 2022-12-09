@@ -17,8 +17,13 @@
   },
   {
     "tag": "movies",
-    "patterns": ["Find trending movies", "Get me some trending movies", "List some trending movies", "Search trending movies", "List movies which are trending"],
+    "patterns": ["Find trending movies", "Get me some trending movies", "List some trending movies", "Search trending movies", "List movies which are trending", "list some popular movies", "get some popular movies", "tell some popular movies to watch out for", "tell some trending movies to watch out for"],
     "responses": ["Finding trending movies", "Searching for trending movies", "Fetching Trending Movies", "Okay", "Sure"]
+  },
+  {
+    "tag": "tv_series",
+    "patterns": ["Find trending tv web series", "Get me some trending tv web series", "List some trending tv web series", "Search trending tv web series", "List tv web series which are trending", "list some popular tv web series", "get some popular tv web series", "tell some popular tv web series to watch out for", "tell some trending tv web series to watch out for"],
+    "responses": ["Finding trending tv series", "Searching for trending web series", "Fetching web series", "Okay", "Sure"]
   },
   {
     "tag": "weather",
@@ -133,6 +138,16 @@
   {
     "tag": "math",
     "patterns": ["what is 10 + 10", "solve for 9 multiply 5", "what is 34 minus 456", "what is 34783 divided by 456", "solve for 9683 / 56", "what is 712 * 9", "what is 2034983 - 342344", "solve for 9 % 2", "what is 345 percentage of 12345", "what is sin of 45", "what is cos(90)", "what is tan 25", "what is log of 345", "what is root of 234", "what is root of 987", "what is sum of 345 and 234", "what is sum of 123 and 789", "what is sum of 765 and 9163", "what is difference of 234 and 5674", "what is difference of 345 and 165", "what is logarithm of 456 base 10", "what is log of 225", "what is log of 1987", "what is logarithm of 9876", "what is product of 34 and 345", "what is product of 873 and 2", "what is 34 multiply 234", "what is 12 multiply 8", "what is 12 divided by 7", "what is 45 + 34", "what is 23145 + 3456772", "what is 2347 - 23463", "what is 234 - 0", "what is 23476 * 3", "what is 6785760 * 1267340", "what is 23 / 8745", "what is 8765 / 56845"],
+    "responses": [""]
+  },
+  {
+    "tag": "open_website",
+    "patterns": ["open google", "open gmail", "open myclass", "open lpulive", "open ums", "open github", "open youtube", "open sanfoundry", "open hackerrank", "open hackerearth", "open codeforces", "open codechef", "open codecademy", "open leetcode", "open udemy", "open edx", "open coursera", "open w3resource", "open w3schools", "open geeksforgeeks", "open stackoverflow", "open instagram", "open facebook", "open linkedin", "open twitter", "open imdb", "open netflix", "open amazon prime", "open whatsapp", "open hotstar", "open cricbuzz", "open google maps", "open flipkart", "open amazon", "open nykaa", "open myntra", "open amazon flex", "open swiggy", "open zomato", "open spotify"],
+    "responses": [""]
+  },
+  {
+    "tag": "open app",
+    "patterns": ["open ms access", "open access", "open ms powerpoint", "open powerpoint", "open wordpad", "open word", "open ms word", "open excel", "open ms excel", "open outlook", "open ms outlook", "open publisher", "open ms publisher", "open onenote", "open ms onenote", "open sharepoint", "open ms sharepoint", "open infopath designer", "open infopath filler", "open brave", "open brave browser", "open calculator", "open camera", "open command prompt", "open computer management", "open control panel", "open cortana", "open discord", "open disk cleanup", "open documentation", "event viewer", "open file explorer", "open git bash", "open git cmd", "open git gui", "open groove music", "open hashcalc", "open magnifier", "open internet explorer", "node js command prompt", "open notepad", "open onedrive", "open paint", "open photos", "open task manager", "open telegram", "open this pc", "open video editor", "open visual studio", "open visual studio code", "open voice recorder", "open zoom"],
     "responses": [""]
   }
   ]
