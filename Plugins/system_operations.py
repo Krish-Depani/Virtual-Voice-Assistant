@@ -4,7 +4,6 @@ import time
 import subprocess
 import AppOpener
 from pynput.keyboard import Key, Controller
-from speak import speak
 from PIL import ImageGrab
 import wmi
 
@@ -115,7 +114,7 @@ class WindowOpt:
         self.keyboard.release(Key.tab)
         self.keyboard.release(Key.alt_l)
 
-    def take_Screen_Shot(self):
+    def Screen_Shot(self):
         from random import randint
         im = ImageGrab.grab()
         im.save(f'ss_{randint(1, 100)}.jpg')
@@ -132,7 +131,7 @@ def systemInfo():
            f"Owner: {my_system_2.PrimaryOwnerName}\n" \
            f"Number of Processors: {psutil.cpu_count()}\n" \
            f"System Type: {my_system_2.SystemType}"
-    speak(info)
+    return info
 
 
 def convert_size(size_bytes):
@@ -150,9 +149,9 @@ def system_stats():
     battery_percent = psutil.sensors_battery().percent
     memory_in_use = convert_size(psutil.virtual_memory().used)
     total_memory = convert_size(psutil.virtual_memory().total)
-    final_res = f"Currently {cpu_stats} percent of CPU, {memory_in_use} of RAM out of total {total_memory} is being used and " \
+    stats = f"Currently {cpu_stats} percent of CPU, {memory_in_use} of RAM out of total {total_memory} is being used and " \
                 f"battery level is at {battery_percent}%"
-    speak(final_res)
+    return stats
 
 
 def app_path(app):

@@ -4,6 +4,9 @@ import base64
 import googleapiclient.discovery
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path='..\\Data\\.env')
 
 # Get the path to the pickle file
 home_dir = os.path.expanduser('~')
@@ -35,4 +38,4 @@ def send_email(receiver_id, subject, message):
                 userId="me", body=message1).execute())
         return message2['labelIds'][0]
     except:
-        return "ERROR OCCURRED"
+        return

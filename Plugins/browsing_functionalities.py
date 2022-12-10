@@ -1,10 +1,11 @@
 import webbrowser
 import re
 import wikipedia
-from Data.websites import websites_dict
 import speedtest
-from speak import speak
 from youtubesearchpython import VideosSearch
+import sys
+sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant\\Data")
+from Data import websites
 
 def googleSearch(query):
 	if 'image' in query:
@@ -30,24 +31,22 @@ def youtube(query):
 	webbrowser.open('https://www.youtube.com/watch?v=' + results[0]['id'])
 	return "Enjoy..."
 
-def open_website(url):
-	webbrowser.open(url)
-
 def open_specified_website(query):
-	website = query[5:]#re.search(r'[a-zA-Z]* (.*)', query)[1]
-	if website in websites_dict:
-		url = websites_dict[website]
+	website = query[5:] #re.search(r'[a-zA-Z]* (.*)', query)[1]
+	if website in websites.websites_dict:
+		url = websites.websites_dict[website]
 	else:
 		return None
-	open_website(url)
+	webbrowser.open(url)
 
 def get_speedtest():
 	try:
 		internet = speedtest.Speedtest()
-		speak(f"Your network's Download Speed is {round(internet.download() / 8388608, 2)}MBps")
-		speak(f"Your network's Upload Speed is {round(internet.upload() / 8388608, 2)}MBps")
+		speed = f"Your network's Download Speed is {round(internet.download() / 8388608, 2)}MBps\n" \
+			   f"Your network's Upload Speed is {round(internet.upload() / 8388608, 2)}MBps"
+		return speed
 	except speedtest.SpeedtestException:
-		print("Speedtest Exception")
+		return "Speedtest Exception"
 	except KeyboardInterrupt:
 		return
 
@@ -56,9 +55,9 @@ def tell_me_about(query):
 		topic = re.search(r'([A-Za-z]* [A-Za-z]* [A-Za-z]* [A-Za-z]*)$', query)[1]
 		result = wikipedia.summary(topic, sentences=3)
 		result = re.sub(r'\[.*]', '', result)
-		speak(result)
+		return result
 	except wikipedia.WikipediaException or Exception:
 		return "Wikipedia Error"
 
 def get_map(query):
-	open_website(f'https://www.google.com/maps/search/{query}')
+	webbrowser.open(f'https://www.google.com/maps/search/{query}')

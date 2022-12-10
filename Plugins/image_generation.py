@@ -10,52 +10,25 @@ load_dotenv(dotenv_path='..\\Data\\.env')
 
 DREAMSTUDIO = os.getenv('DREAMSTUDIO_API')
 
-text = 'a biker on a path to heaven stars in background, hyper-realistic'
+def generate_image(text):
+    stability_api = client.StabilityInference(
+        key=DREAMSTUDIO,
+        verbose=True,
+    )
 
+    # the object returned is a python generator
+    answers = stability_api.generate(
+        prompt=text,
+        seed=95456, # if provided, specifying a random seed makes results deterministic
+    )
 
-stability_api = client.StabilityInference(
-    key=DREAMSTUDIO,
-    verbose=True,
-)
-
-# the object returned is a python generator
-answers = stability_api.generate(
-    prompt=text,
-    seed=34567, # if provided, specifying a random seed makes results deterministic
-    steps=20, # defaults to 30 if not specified
-)
-
-# iterating over the generator produces the api response
-for resp in answers:
-    for artifact in resp.artifacts:
-        if artifact.finish_reason == generation.FILTER:
-            warnings.warn(
-                "Your request activated the API's safety filters and could not be processed."
-                "Please modify the prompt and try again.")
-        if artifact.type == generation.ARTIFACT_IMAGE:
-            img = Image.open(io.BytesIO(artifact.binary))
-            img.show()
-
-'''
-stability_api = client.StabilityInference(
-    key=DREAMSTUDIO,
-    verbose=True,
-)
-
-# the object returned is a python generator
-answers = stability_api.generate(
-    prompt=text,
-    seed=95456, # if provided, specifying a random seed makes results deterministic
-)
-
-# iterating over the generator produces the api response
-for resp in answers:
-    for artifact in resp.artifacts:
-        if artifact.finish_reason == generation.FILTER:
-            warnings.warn(
-                "Your request activated the API's safety filters and could not be processed."
-                "Please modify the prompt and try again.")
-        if artifact.type == generation.ARTIFACT_IMAGE:
-            img = Image.open(io.BytesIO(artifact.binary))
-            img.show()
-'''''
+    # iterating over the generator produces the api response
+    for resp in answers:
+        for artifact in resp.artifacts:
+            if artifact.finish_reason == generation.FILTER:
+                warnings.warn(
+                    "Your request activated the API's safety filters and could not be processed."
+                    "Please modify the prompt and try again.")
+            if artifact.type == generation.ARTIFACT_IMAGE:
+                img = Image.open(io.BytesIO(artifact.binary))
+                img.show()

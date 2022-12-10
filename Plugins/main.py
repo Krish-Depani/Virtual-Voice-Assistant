@@ -1,6 +1,7 @@
 import json
 import os
 import logging
+import pyttsx3
 logging.disable(logging.WARNING)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from keras_preprocessing.sequence import pad_sequences
@@ -9,15 +10,26 @@ from keras.models import load_model
 from pickle import load
 import speech_recognition as sr
 import re
+import time
 from threading import Thread
-from speak import speak
+import sys
+sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant")
+from image_generation import generate_image
+from gmail import send_email
 from API_functionalities import *
 from system_operations import *
 from browsing_functionalities import *
 
 recognizer = sr.Recognizer()
 
-with open("../Data/intents.json") as file:
+engine = pyttsx3.init()
+engine.setProperty('rate', 185)
+
+sys_ops = SystemTasks()
+tab_ops = TabOpt()
+win_ops = WindowOpt()
+
+with open("..\\Data\\intents.json") as file:
     data = json.load(file)
 
 # load trained model
@@ -30,6 +42,14 @@ with open('..\\Data\\tokenizer.pickle', 'rb') as handle:
 # load label encoder object
 with open('..\\Data\\label_encoder.pickle', 'rb') as enc:
     lbl_encoder = load(enc)
+
+def speak(text):
+    print(text)
+    try:
+        engine.say(text)
+        engine.runAndWait()
+    except KeyboardInterrupt or RuntimeError:
+        return
 
 def chat(text):
     # parameters
@@ -79,92 +99,133 @@ main("abc")
 '''
 
 def main(query):
+    if "google" and "search" in query or "google" and "how to" in query:
+        googleSearch(query)
+        return
+    elif "youtube" and "search" in query or "play" in query or "how to" and "youtube" in query:
+        youtube(query)
+        return
     intent_response = chat(query)
     intent = intent_response['intent']
     response = intent_response['response']
     if intent == "joke":
         speak(response)
-        get_joke()
+        joke = get_joke()
+        speak(joke)
     elif intent == "news":
         speak(response)
-        get_news()
+        news = get_news()
+        speak(news)
     elif intent == "ip":
         speak(response)
-        get_ip()
+        ip = get_ip()
+        speak(ip)
     elif intent == "movies":
         speak(response)
+        speak("Some of the latest popular movies are as follows :")
         get_popular_movies()
     elif intent == "tv_series":
         speak(response)
+        speak("Some of the latest popular tv series are as follows :")
         get_popular_tvseries()
     elif intent == "weather":
         speak(response)
         city = re.search(r"(in|of|for) ([a-zA-Z]*)", query)
         if city:
             city = city[2]
-            get_weather(city)
+            weather = get_weather(city)
+            speak(weather)
         else:
-            get_weather()
+            weather = get_weather()
+            speak(weather)
     elif intent == "internet_speedtest":
-        speak(response)
-        get_speedtest()
+        speak(response + ", this may take some time")
+        speed = get_speedtest()
+        speak(speed)
     elif intent == "system_stats":
         speak(response)
-        system_stats()
+        stats = system_stats()
+        speak(stats)
     elif intent == "image_generation":
-        pass
+        speak("what kind of image you want to generate?")
+        text = record()
+        speak(response)
+        generate_image(text)
     elif intent == "system_info":
-        pass
+        speak(response)
+        info = systemInfo()
+        speak(info)
     elif intent == "email":
-        pass
+        speak("Type the receiver id : ")
+        receiver_id = input()
+        speak("Tell the subject of email")
+        subject = record()
+        speak("tell the body of email")
+        body = record()
+        success = send_email(receiver_id, subject, body)
+        if success == "SENT":
+            speak('Email sent successfully')
+        else:
+            speak("Error occurred while sending email")
     elif intent == "select_text":
-        pass
+        sys_ops.select()
     elif intent == "copy_text":
-        pass
+        sys_ops.copy()
     elif intent == "paste_text":
-        pass
+        sys_ops.paste()
     elif intent == "delete_text":
-        pass
+        sys_ops.delete()
     elif intent == "new_file":
-        pass
+        sys_ops.new_file()
     elif intent == "switch_tab":
-        pass
+        tab_ops.switchTab()
     elif intent == "close_tab":
-        pass
+        tab_ops.closeTab()
     elif intent == "new_tab":
-        pass
+        tab_ops.newTab()
     elif intent == "close_window":
-        pass
+        win_ops.closeWindow()
     elif intent == "switch_window":
-        pass
+        win_ops.switchWindow()
     elif intent == "minimize_window":
-        pass
+        win_ops.minimizeWindow()
     elif intent == "maximize_window":
-        pass
+        win_ops.maximizeWindow()
     elif intent == "screenshot":
-        pass
+        win_ops.Screen_Shot()
     elif intent == "stopwatch":
         pass
     elif intent == "wikipedia":
-        pass
+        description = tell_me_about(query)
+        speak(description)
     elif intent == "math":
-        pass
+        answer = get_general_response(query)
+        speak(answer)
     elif intent == "open_website":
-        pass
+        open_specified_website(query)
     elif intent == "open_app":
-        pass
+        open_app(query)
+    elif intent == "exit":
+        exit(0)
+    else:
+        answer = get_general_response(query)
+        if answer:
+            speak(answer)
+        else:
+            speak("Sorry, not able to answer your query")
+    return
 
 
-'''
 if __name__ == "__main__":
     try:
         Thread(target=listen_audio()).start()
     except:
         pass
+
 '''
+if __name__ == "__main__":
+    try:
+        listen_audio()
+    except KeyboardInterrupt or RuntimeError:
+        pass
 '''
-try:
-    listen_audio()
-except KeyboardInterrupt or RuntimeError:
-    pass
-    '''

@@ -42,7 +42,3 @@ websites_dict = {
     "zomato": "https://www.zomato.com/",
     "spotify": "https://open.spotify.com/"
 }
-lst = []
-for key in websites_dict.keys():
-    lst.append("open "+key)
-print(lst)
