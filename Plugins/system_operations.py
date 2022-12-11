@@ -1,6 +1,7 @@
 import math
 import psutil
 import time
+from random import randint
 import subprocess
 import AppOpener
 from pynput.keyboard import Key, Controller
@@ -49,15 +50,13 @@ class SystemTasks:
         self.keyboard.release('n')
         self.keyboard.release(Key.ctrl)
 
-    def save(self, query, name):
-        if "don't" in query:
-            self.keyboard.press(Key.right)
-        else:
-            self.keyboard.press(Key.ctrl)
-            self.keyboard.press('s')
-            self.keyboard.release('s')
-            self.keyboard.release(Key.ctrl)
-            self.write(name)
+    def save(self, name):
+        self.keyboard.press(Key.ctrl)
+        self.keyboard.press('s')
+        self.keyboard.release('s')
+        self.keyboard.release(Key.ctrl)
+        time.sleep(0.2)
+        self.write(name)
         self.hitEnter()
 
 
@@ -115,9 +114,8 @@ class WindowOpt:
         self.keyboard.release(Key.alt_l)
 
     def Screen_Shot(self):
-        from random import randint
         im = ImageGrab.grab()
-        im.save(f'ss_{randint(1, 100)}.jpg')
+        im.save(f'C:\\Users\\Hp\\Pictures\\Screenshots\\ss_{randint(1, 100)}.jpg')
 
 
 def systemInfo():
@@ -180,3 +178,10 @@ def open_app(query):
             subprocess.Popen(path)
             return
     AppOpener.run(query[5:])
+
+def take_note(note):
+    open_app("open notepad")
+    time.sleep(0.2)
+    sys_task = SystemTasks()
+    sys_task.write(note)
+    sys_task.save(f'note_{randint(1, 100)}')

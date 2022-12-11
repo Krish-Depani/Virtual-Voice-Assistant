@@ -65,7 +65,7 @@ def get_weather(city=''):
     except KeyboardInterrupt:
         return
 
-def get_general_response(query):
+def get_general_response(query, intent):
     client = Client(app_id=WOLFRAMALPHA)
     try:
         response = client.query(query)

@@ -10,7 +10,6 @@ from keras.models import load_model
 from pickle import load
 import speech_recognition as sr
 import re
-import time
 from threading import Thread
 import sys
 sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant")
@@ -54,17 +53,11 @@ def speak(text):
 def chat(text):
     # parameters
     max_len = 20
-    intents = {"intent": "", "response": ""}
     while True:
         result = model.predict(pad_sequences(tokenizer.texts_to_sequences([text]),
                                                                           truncating='post', maxlen=max_len), verbose=False)
-        tag = lbl_encoder.inverse_transform([np.argmax(result)])[0]
-
-        for i in data['intents']:
-            if i['tag'] == tag:
-                intents["intent"] = tag
-                intents["response"] = np.random.choice(i['responses'])
-                return intents
+        intent = lbl_encoder.inverse_transform([np.argmax(result)])[0]
+        return intent
 
 def record():
     with sr.Microphone() as mic:
@@ -89,131 +82,145 @@ def listen_audio():
     except KeyboardInterrupt:
         return
 
-'''
-def main(response):
-    while True:
-        ip = input("Enter input : ")
-        print(chat(ip))
-
-main("abc")
-'''
-
 def main(query):
-    if "google" and "search" in query or "google" and "how to" in query:
-        googleSearch(query)
-        return
-    elif "youtube" and "search" in query or "play" in query or "how to" and "youtube" in query:
-        youtube(query)
-        return
-    intent_response = chat(query)
-    intent = intent_response['intent']
-    response = intent_response['response']
-    if intent == "joke":
-        speak(response)
-        joke = get_joke()
-        speak(joke)
-    elif intent == "news":
-        speak(response)
-        news = get_news()
-        speak(news)
-    elif intent == "ip":
-        speak(response)
-        ip = get_ip()
-        speak(ip)
-    elif intent == "movies":
-        speak(response)
-        speak("Some of the latest popular movies are as follows :")
-        get_popular_movies()
-    elif intent == "tv_series":
-        speak(response)
-        speak("Some of the latest popular tv series are as follows :")
-        get_popular_tvseries()
-    elif intent == "weather":
-        speak(response)
-        city = re.search(r"(in|of|for) ([a-zA-Z]*)", query)
-        if city:
-            city = city[2]
-            weather = get_weather(city)
-            speak(weather)
-        else:
-            weather = get_weather()
-            speak(weather)
-    elif intent == "internet_speedtest":
-        speak(response + ", this may take some time")
-        speed = get_speedtest()
-        speak(speed)
-    elif intent == "system_stats":
-        speak(response)
-        stats = system_stats()
-        speak(stats)
-    elif intent == "image_generation":
-        speak("what kind of image you want to generate?")
-        text = record()
-        speak(response)
-        generate_image(text)
-    elif intent == "system_info":
-        speak(response)
-        info = systemInfo()
-        speak(info)
-    elif intent == "email":
-        speak("Type the receiver id : ")
-        receiver_id = input()
-        speak("Tell the subject of email")
-        subject = record()
-        speak("tell the body of email")
-        body = record()
-        success = send_email(receiver_id, subject, body)
-        if success == "SENT":
-            speak('Email sent successfully')
-        else:
-            speak("Error occurred while sending email")
-    elif intent == "select_text":
-        sys_ops.select()
-    elif intent == "copy_text":
-        sys_ops.copy()
-    elif intent == "paste_text":
-        sys_ops.paste()
-    elif intent == "delete_text":
-        sys_ops.delete()
-    elif intent == "new_file":
-        sys_ops.new_file()
-    elif intent == "switch_tab":
-        tab_ops.switchTab()
-    elif intent == "close_tab":
-        tab_ops.closeTab()
-    elif intent == "new_tab":
-        tab_ops.newTab()
-    elif intent == "close_window":
-        win_ops.closeWindow()
-    elif intent == "switch_window":
-        win_ops.switchWindow()
-    elif intent == "minimize_window":
-        win_ops.minimizeWindow()
-    elif intent == "maximize_window":
-        win_ops.maximizeWindow()
-    elif intent == "screenshot":
-        win_ops.Screen_Shot()
-    elif intent == "stopwatch":
-        pass
-    elif intent == "wikipedia":
-        description = tell_me_about(query)
-        speak(description)
-    elif intent == "math":
-        answer = get_general_response(query)
-        speak(answer)
-    elif intent == "open_website":
-        open_specified_website(query)
-    elif intent == "open_app":
-        open_app(query)
-    elif intent == "exit":
-        exit(0)
-    else:
-        answer = get_general_response(query)
-        if answer:
+        intent = chat(query)
+        done = False
+        if "google" and "search" in query or "google" and "how to" in query or "google" in query:
+            googleSearch(query)
+            return
+        elif "youtube" and "search" in query or "play" in query or "how to" and "youtube" in query:
+            youtube(query)
+            return
+        if intent == "joke":
+            joke = get_joke()
+            speak(joke)
+            done = True
+        elif intent == "news":
+            news = get_news()
+            speak(news)
+            done = True
+        elif intent == "ip":
+            ip = get_ip()
+            speak(ip)
+            done = True
+        elif intent == "movies":
+            speak("Some of the latest popular movies are as follows :")
+            get_popular_movies()
+            done = True
+        elif intent == "tv_series":
+            speak("Some of the latest popular tv series are as follows :")
+            get_popular_tvseries()
+            done = True
+        elif intent == "weather":
+            city = re.search(r"(in|of|for) ([a-zA-Z]*)", query)
+            if city:
+                city = city[2]
+                weather = get_weather(city)
+                speak(weather)
+            else:
+                weather = get_weather()
+                speak(weather)
+            done = True
+        elif intent == "internet_speedtest":
+            speak("Getting your internet speed, this may take some time")
+            speed = get_speedtest()
+            speak(speed)
+            done = True
+        elif intent == "system_stats":
+            stats = system_stats()
+            speak(stats)
+            done = True
+        elif intent == "image_generation":
+            speak("what kind of image you want to generate?")
+            text = record()
+            speak("Generating image please wait..")
+            generate_image(text)
+            done = True
+        elif intent == "system_info":
+            info = systemInfo()
+            speak(info)
+            done = True
+        elif intent == "email":
+            speak("Type the receiver id : ")
+            receiver_id = input()
+            speak("Tell the subject of email")
+            subject = record()
+            speak("tell the body of email")
+            body = record()
+            success = send_email(receiver_id, subject, body)
+            if success == "SENT":
+                speak('Email sent successfully')
+            else:
+                speak("Error occurred while sending email")
+            done = True
+        elif intent == "select_text":
+            sys_ops.select()
+            done = True
+        elif intent == "copy_text":
+            sys_ops.copy()
+            done = True
+        elif intent == "paste_text":
+            sys_ops.paste()
+            done = True
+        elif intent == "delete_text":
+            sys_ops.delete()
+            done = True
+        elif intent == "new_file":
+            sys_ops.new_file()
+            done = True
+        elif intent == "switch_tab":
+            tab_ops.switchTab()
+            done = True
+        elif intent == "close_tab":
+            tab_ops.closeTab()
+            done = True
+        elif intent == "new_tab":
+            tab_ops.newTab()
+            done = True
+        elif intent == "close_window":
+            win_ops.closeWindow()
+            done = True
+        elif intent == "switch_window":
+            win_ops.switchWindow()
+            done = True
+        elif intent == "minimize_window":
+            win_ops.minimizeWindow()
+            done = True
+        elif intent == "maximize_window":
+            win_ops.maximizeWindow()
+            done = True
+        elif intent == "screenshot":
+            win_ops.Screen_Shot()
+            done = True
+        elif intent == "stopwatch":
+            pass
+        elif intent == "wikipedia":
+            description = tell_me_about(query)
+            speak(description)
+            done = True
+        elif intent == "math":
+            answer = get_general_response(query)
             speak(answer)
-        else:
-            speak("Sorry, not able to answer your query")
-    return
+            done = True
+        elif intent == "open_website":
+            open_specified_website(query)
+            done = True
+        elif intent == "open_app":
+            open_app(query)
+            done = True
+        elif intent == "note":
+            speak("what would you like to take down?")
+            note = record()
+            take_note(note)
+        elif intent == "exit":
+            exit(0)
+        if not done:
+            answer = get_general_response(query, intent)
+            if answer:
+                speak(answer)
+            else:
+                speak("Sorry, not able to answer your query")
+        return
 
 
 if __name__ == "__main__":
