@@ -14,11 +14,11 @@
   },
   {
     "tag": "movies",
-    "patterns": ["Find trending movies", "List some trending movies", "list some popular movies", "get some popular movies"]
+    "patterns": ["Find trending movies", "List some trending movies", "list some popular movies", "get some popular movies", "tell some popular movies"]
   },
   {
     "tag": "tv_series",
-    "patterns": ["Find trending tv web series", "List some trending tv web series", "list some popular tv web series", "get some popular tv web series"]
+    "patterns": ["Find trending tv web series", "List some trending tv web series", "list some popular tv web series", "get some popular tv web series", "tell me some popular web tv series"]
   },
   {
     "tag": "weather",
@@ -127,6 +127,10 @@
   {
     "tag": "note",
     "patterns": ["take note", "take a note"]
+  },
+  {
+    "tag": "get_data",
+    "patterns": ["show chat history", "get history", "get assistant chat history", "get chat history"]
   }
   ]
 }

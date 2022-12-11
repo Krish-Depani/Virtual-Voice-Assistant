@@ -43,7 +43,7 @@ with open('..\\Data\\label_encoder.pickle', 'rb') as enc:
     lbl_encoder = load(enc)
 
 def speak(text):
-    print(text)
+    print("ASSISTANT -> " + text)
     try:
         engine.say(text)
         engine.runAndWait()
@@ -69,6 +69,7 @@ def record():
             text = recognizer.recognize_google(audio, language='us-in').lower()
         except:
             return None
+    print("USER -> " + text)
     return text
 
 def listen_audio():
@@ -91,27 +92,30 @@ def main(query):
         elif "youtube" and "search" in query or "play" in query or "how to" and "youtube" in query:
             youtube(query)
             return
-        if intent == "joke":
+        if intent == "joke" and "joke" in query:
             joke = get_joke()
-            speak(joke)
-            done = True
-        elif intent == "news":
+            if joke:
+                speak(joke)
+                done = True
+        elif intent == "news" and "news" in query:
             news = get_news()
-            speak(news)
-            done = True
-        elif intent == "ip":
+            if news:
+                speak(news)
+                done = True
+        elif intent == "ip" and "ip" in query:
             ip = get_ip()
-            speak(ip)
-            done = True
-        elif intent == "movies":
+            if ip:
+                speak(ip)
+                done = True
+        elif intent == "movies" and "movies" in query:
             speak("Some of the latest popular movies are as follows :")
             get_popular_movies()
             done = True
-        elif intent == "tv_series":
+        elif intent == "tv_series" and "tv series" in query:
             speak("Some of the latest popular tv series are as follows :")
             get_popular_tvseries()
             done = True
-        elif intent == "weather":
+        elif intent == "weather" and "weather" in query:
             city = re.search(r"(in|of|for) ([a-zA-Z]*)", query)
             if city:
                 city = city[2]
@@ -121,26 +125,27 @@ def main(query):
                 weather = get_weather()
                 speak(weather)
             done = True
-        elif intent == "internet_speedtest":
+        elif intent == "internet_speedtest" and "internet" in query:
             speak("Getting your internet speed, this may take some time")
             speed = get_speedtest()
-            speak(speed)
-            done = True
-        elif intent == "system_stats":
+            if speed:
+                speak(speed)
+                done = True
+        elif intent == "system_stats" and "stats" in query:
             stats = system_stats()
             speak(stats)
             done = True
-        elif intent == "image_generation":
+        elif intent == "image_generation" and "image" in query:
             speak("what kind of image you want to generate?")
             text = record()
             speak("Generating image please wait..")
             generate_image(text)
             done = True
-        elif intent == "system_info":
+        elif intent == "system_info" and ("info" in query or "specs" in query or "information" in query):
             info = systemInfo()
             speak(info)
             done = True
-        elif intent == "email":
+        elif intent == "email" and "email" in query:
             speak("Type the receiver id : ")
             receiver_id = input()
             speak("Tell the subject of email")
@@ -153,70 +158,78 @@ def main(query):
             else:
                 speak("Error occurred while sending email")
             done = True
-        elif intent == "select_text":
+        elif intent == "select_text" and "select" in query:
             sys_ops.select()
             done = True
-        elif intent == "copy_text":
+        elif intent == "copy_text" and "copy" in query:
             sys_ops.copy()
             done = True
-        elif intent == "paste_text":
+        elif intent == "paste_text" and "paste" in query:
             sys_ops.paste()
             done = True
-        elif intent == "delete_text":
+        elif intent == "delete_text" and "delete" in query:
             sys_ops.delete()
             done = True
-        elif intent == "new_file":
+        elif intent == "new_file" and "new" in query:
             sys_ops.new_file()
             done = True
-        elif intent == "switch_tab":
+        elif intent == "switch_tab" and "switch" in query and "tab" in query:
             tab_ops.switchTab()
             done = True
-        elif intent == "close_tab":
+        elif intent == "close_tab" and "close" in query and "tab" in query:
             tab_ops.closeTab()
             done = True
-        elif intent == "new_tab":
+        elif intent == "new_tab" and "new" in query and "tab" in query:
             tab_ops.newTab()
             done = True
-        elif intent == "close_window":
+        elif intent == "close_window" and "close" in query:
             win_ops.closeWindow()
             done = True
-        elif intent == "switch_window":
+        elif intent == "switch_window" and "switch" in query:
             win_ops.switchWindow()
             done = True
-        elif intent == "minimize_window":
+        elif intent == "minimize_window" and "minimize" in query:
             win_ops.minimizeWindow()
             done = True
-        elif intent == "maximize_window":
+        elif intent == "maximize_window" and "maximize" in query:
             win_ops.maximizeWindow()
             done = True
-        elif intent == "screenshot":
+        elif intent == "screenshot" and "screenshot" in query:
             win_ops.Screen_Shot()
             done = True
         elif intent == "stopwatch":
             pass
-        elif intent == "wikipedia":
+        elif intent == "wikipedia" and ("tell" in query or "about" in query):
             description = tell_me_about(query)
-            speak(description)
+            if description:
+                speak(description)
+            else:
+                googleSearch(query)
             done = True
         elif intent == "math":
             answer = get_general_response(query)
-            speak(answer)
-            done = True
+            if answer:
+                speak(answer)
+                done = True
         elif intent == "open_website":
-            open_specified_website(query)
-            done = True
+            completed = open_specified_website(query)
+            if completed:
+                done = True
         elif intent == "open_app":
-            open_app(query)
-            done = True
-        elif intent == "note":
+            completed = open_app(query)
+            if completed:
+                done = True
+        elif intent == "note" and "note" in query:
             speak("what would you like to take down?")
             note = record()
             take_note(note)
             done = True
-        elif intent == "exit":
+        elif intent == "get_data" and "history" in query:
+            pass
+        elif intent == "exit" and ("exit" in query or "terminate" in query or "quit" in query):
             exit(0)
         if not done:
-            answer = get_general_response(query, intent)
+            answer = get_general_response(query)
             if answer:
                 speak(answer)
             else:
@@ -226,14 +239,6 @@ def main(query):
 
 if __name__ == "__main__":
     try:
-        Thread(target=listen_audio()).start()
+        listen_audio()
     except:
         pass
-
-'''
-if __name__ == "__main__":
-    try:
-        listen_audio()
-    except KeyboardInterrupt or RuntimeError:
-        pass
-'''

@@ -15,6 +15,7 @@ def googleSearch(query):
 	query = query.replace('search', '')
 	query = query.replace('show', '')
 	query = query.replace('google', '')
+	query = query.replace('tell me about', '')
 	webbrowser.open("https://www.google.com/search?q=" + query)
 	return "Here you go..."
 
@@ -35,9 +36,10 @@ def open_specified_website(query):
 	website = query[5:] #re.search(r'[a-zA-Z]* (.*)', query)[1]
 	if website in websites.websites_dict:
 		url = websites.websites_dict[website]
+		webbrowser.open(url)
+		return True
 	else:
 		return None
-	webbrowser.open(url)
 
 def get_speedtest():
 	try:
@@ -46,7 +48,7 @@ def get_speedtest():
 			   f"Your network's Upload Speed is {round(internet.upload() / 8388608, 2)}MBps"
 		return speed
 	except speedtest.SpeedtestException:
-		return "Speedtest Exception"
+		return None
 	except KeyboardInterrupt:
 		return
 
@@ -57,9 +59,7 @@ def tell_me_about(query):
 		result = re.sub(r'\[.*]', '', result)
 		return result
 	except wikipedia.WikipediaException or Exception:
-		return "Wikipedia Error"
+		return None
 
 def get_map(query):
 	webbrowser.open(f'https://www.google.com/maps/search/{query}')
-
-print(tell_me_about("tell me about prime minister of india"))
