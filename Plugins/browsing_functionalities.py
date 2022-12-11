@@ -52,7 +52,7 @@ def get_speedtest():
 
 def tell_me_about(query):
 	try:
-		topic = re.search(r'([A-Za-z]* [A-Za-z]* [A-Za-z]* [A-Za-z]*)$', query)[1]
+		topic = query.replace("tell me about ", "") #re.search(r'([A-Za-z]* [A-Za-z]* [A-Za-z]*)$', query)[1]
 		result = wikipedia.summary(topic, sentences=3)
 		result = re.sub(r'\[.*]', '', result)
 		return result
@@ -61,3 +61,5 @@ def tell_me_about(query):
 
 def get_map(query):
 	webbrowser.open(f'https://www.google.com/maps/search/{query}')
+
+print(tell_me_about("tell me about prime minister of india"))

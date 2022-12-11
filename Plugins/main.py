@@ -212,6 +212,7 @@ def main(query):
             speak("what would you like to take down?")
             note = record()
             take_note(note)
+            done = True
         elif intent == "exit":
             exit(0)
         if not done:
