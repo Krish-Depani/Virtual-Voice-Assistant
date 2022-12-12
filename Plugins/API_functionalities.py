@@ -80,25 +80,25 @@ def get_popular_movies():
         response = requests.get(f"https://api.themoviedb.org/3/movie/popular?api_key={TMDB}&region=IN&sort_by=popularity.desc&"
                                 f"primary_release_year={datetime.date.today().year}").json()
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
     try:
         print()
         for movie in response["results"]:
             title = movie['title']
             print(title)
     except KeyError:
-        return "Query Not Found"
+        return None
 
 def get_popular_tvseries():
     try:
         response = requests.get(f"https://api.themoviedb.org/3/tv/popular?api_key={TMDB}&region=IN&sort_by=popularity.desc&"
                                 f"primary_release_year={datetime.date.today().year}").json()
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
     try:
         print()
         for show in response["results"]:
             title = show['name']
             print(title)
     except KeyError:
-        return "Query Not Found"
+        return None

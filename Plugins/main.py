@@ -13,6 +13,7 @@ import re
 from threading import Thread
 import sys
 sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant")
+from database import *
 from image_generation import generate_image
 from gmail import send_email
 from API_functionalities import *
@@ -84,6 +85,8 @@ def listen_audio():
         return
 
 def main(query):
+        create_table()
+        add_data(query)
         intent = chat(query)
         done = False
         if "google" and "search" in query or "google" and "how to" in query or "google" in query:
@@ -225,7 +228,9 @@ def main(query):
             take_note(note)
             done = True
         elif intent == "get_data" and "history" in query:
-            pass
+            create_table()
+            get_data()
+            done = True
         elif intent == "exit" and ("exit" in query or "terminate" in query or "quit" in query):
             exit(0)
         if not done:
