@@ -12,10 +12,12 @@ def create_table():
             QUERY VARCHAR(255) NOT NULL ,
             DATE_TIME VARCHAR(50) NOT NULL );'''
     cursor.execute(table)
+    conn.commit()
 
 def add_data(query):
     table = "INSERT INTO ASSISTANT(QUERY, DATE_TIME) VALUES (?, datetime('now', 'localtime'))"
     cursor.execute(table, (query,))
+    conn.commit()
     return True
 
 def get_data():
@@ -27,3 +29,4 @@ def get_data():
     print()
     for row in data:
         print("{:<14} {:<49} {:<20}".format(row[0], row[1], row[2]))
+    conn.commit()

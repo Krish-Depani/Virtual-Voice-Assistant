@@ -89,11 +89,14 @@ def main(query):
         add_data(query)
         intent = chat(query)
         done = False
-        if "google" and "search" in query or "google" and "how to" in query or "google" in query:
+        if ("google" in query and "search" in query) or ("google" in query and "how to" in query) or "google" in query:
             googleSearch(query)
             return
-        elif "youtube" and "search" in query or "play" in query or "how to" and "youtube" in query:
+        elif ("youtube" in query and "search" in query) or "play" in query or ("how to" in query and "youtube" in query):
             youtube(query)
+            return
+        elif "distance" in query or "map" in query:
+            get_map(query)
             return
         if intent == "joke" and "joke" in query:
             joke = get_joke()

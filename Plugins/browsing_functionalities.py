@@ -47,9 +47,7 @@ def get_speedtest():
 		speed = f"Your network's Download Speed is {round(internet.download() / 8388608, 2)}MBps\n" \
 			   f"Your network's Upload Speed is {round(internet.upload() / 8388608, 2)}MBps"
 		return speed
-	except speedtest.SpeedtestException:
-		return None
-	except KeyboardInterrupt:
+	except (speedtest.SpeedtestException, KeyboardInterrupt) as e:
 		return
 
 def tell_me_about(query):
@@ -58,7 +56,7 @@ def tell_me_about(query):
 		result = wikipedia.summary(topic, sentences=3)
 		result = re.sub(r'\[.*]', '', result)
 		return result
-	except wikipedia.WikipediaException or Exception:
+	except (wikipedia.WikipediaException, Exception) as e:
 		return None
 
 def get_map(query):

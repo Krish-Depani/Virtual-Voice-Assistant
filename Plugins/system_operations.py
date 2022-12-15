@@ -176,8 +176,9 @@ def open_app(query):
         if app in query:
             path = app_path(app)
             subprocess.Popen(path)
-            return
+            return True
     AppOpener.run(query[5:])
+    return True
 
 def take_note(note):
     open_app("open notepad")
