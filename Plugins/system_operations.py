@@ -183,8 +183,6 @@ def open_app(query):
 def take_note(note):
     open_app("open notepad")
     time.sleep(0.2)
-    win_ops = WindowOpt()
     sys_task = SystemTasks()
     sys_task.write(note)
     sys_task.save(f'note_{randint(1, 100)}')
-    win_ops.closeWindow()

@@ -10,7 +10,7 @@
   },
   {
     "tag": "ip",
-    "patterns": ["what is my ip address", "ge my ip address", "Find ip address", "Tell ip address"]
+    "patterns": ["what is my ip address", "get my ip address", "Find ip address", "Tell ip address"]
   },
   {
     "tag": "movies",

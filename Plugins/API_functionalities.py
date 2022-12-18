@@ -20,20 +20,20 @@ def get_ip(_return=False):
         if _return:
             return response
         else:
-            return f'Your IP address is {response["ip"]}'
+            return f'Your IP address is {response["query"]}'
     except KeyboardInterrupt:
-        return
+        return None
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
 
 def get_joke():
     try:
         joke = requests.get('https://v2.jokeapi.dev/joke/Any?format=txt').text
         return joke
     except KeyboardInterrupt:
-        return
+        return None
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
 
 def get_news():
     try:
@@ -43,9 +43,9 @@ def get_news():
              top_news += re.sub(r'[|-] [A-Za-z0-9 |:.]*', '', top_headlines['articles'][i]['title']).replace("’", "'") + '\n'
         return top_news
     except KeyboardInterrupt:
-        return
+        return None
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
 
 def get_weather(city=''):
     try:
@@ -59,9 +59,9 @@ def get_weather(city=''):
                f'Visibility is {int(response["visibility"] / 1000)}km'
         return weather
     except requests.exceptions.RequestException:
-        return "Request Error"
+        return None
     except KeyboardInterrupt:
-        return
+        return None
 
 def get_general_response(query):
     client = Client(app_id=WOLFRAMALPHA)
@@ -71,7 +71,7 @@ def get_general_response(query):
     except (StopIteration, AttributeError) as e:
         return None
     except KeyboardInterrupt:
-        return
+        return None
 
 def get_popular_movies():
     try:

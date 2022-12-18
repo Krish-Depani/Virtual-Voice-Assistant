@@ -1,24 +1,28 @@
-import json
-import os
-import logging
-import pyttsx3
-logging.disable(logging.WARNING)
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-from keras_preprocessing.sequence import pad_sequences
-import numpy as np
-from keras.models import load_model
-from pickle import load
-import speech_recognition as sr
-import re
-from threading import Thread
-import sys
-sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant")
-from database import *
-from image_generation import generate_image
-from gmail import send_email
-from API_functionalities import *
-from system_operations import *
-from browsing_functionalities import *
+try:
+    # importing prebuilt modules
+    import json
+    import os
+    import logging
+    import pyttsx3
+    logging.disable(logging.WARNING)
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # disabling warnings for gpu requirements
+    from keras_preprocessing.sequence import pad_sequences
+    import numpy as np
+    from keras.models import load_model
+    from pickle import load
+    import speech_recognition as sr
+    import sys
+    sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant") # adding voice assistant directory to system path
+    # importing modules made for assistant
+    from database import *
+    from image_generation import generate_image
+    from email import send_email
+    from API_functionalities import *
+    from system_operations import *
+    from browsing_functionalities import *
+except (ImportError, SystemError, Exception, KeyboardInterrupt) as e:
+    print("ERROR OCCURRED WHILE IMPORTING THE MODULES")
+    exit(0)
 
 recognizer = sr.Recognizer()
 
@@ -28,9 +32,6 @@ engine.setProperty('rate', 185)
 sys_ops = SystemTasks()
 tab_ops = TabOpt()
 win_ops = WindowOpt()
-
-with open("..\\Data\\intents.json") as file:
-    data = json.load(file)
 
 # load trained model
 model = load_model('..\\Data\\chat_model')
@@ -159,7 +160,7 @@ def main(query):
             speak("tell the body of email")
             body = record()
             success = send_email(receiver_id, subject, body)
-            if success == "SENT":
+            if success:
                 speak('Email sent successfully')
             else:
                 speak("Error occurred while sending email")
