@@ -1,6 +1,5 @@
 try:
     # importing prebuilt modules
-    import json
     import os
     import logging
     import pyttsx3
@@ -16,7 +15,7 @@ try:
     # importing modules made for assistant
     from database import *
     from image_generation import generate_image
-    from email import send_email
+    from gmail import send_email
     from API_functionalities import *
     from system_operations import *
     from browsing_functionalities import *

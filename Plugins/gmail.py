@@ -28,4 +28,3 @@ def send_email(reciever_id, subject, body):
     s.quit()
     return True
 
-send_email("krishdepani@gmail.com", "Testing", "Testing voice assistant")
