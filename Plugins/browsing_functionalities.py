@@ -3,9 +3,8 @@ import re
 import wikipedia
 import speedtest
 from youtubesearchpython import VideosSearch
-import sys
-sys.path.insert(0, "C:\\Users\\Hp\\PycharmProjects\\Virtual_Voice_Assistant\\Data")
-from Data import websites
+from Plugins import websites
+
 
 def googleSearch(query):
 	if 'image' in query:

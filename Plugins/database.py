@@ -2,7 +2,7 @@
 import sqlite3
 
 # Connecting to sqlite
-conn = sqlite3.connect('..\\Data\\gfg.db')
+conn = sqlite3.connect('..\\Data\\chats.db')
 
 # Creating a cursor object using the cursor() method
 cursor = conn.cursor()
