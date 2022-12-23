@@ -108,7 +108,6 @@ def listen_audio():
         return
 
 def main(query):
-        create_table()
         add_data(query)
         intent = chat(query)
         done = False
@@ -254,7 +253,6 @@ def main(query):
             take_note(note)
             done = True
         elif intent == "get_data" and "history" in query:
-            create_table()
             get_data()
             done = True
         elif intent == "exit" and ("exit" in query or "terminate" in query or "quit" in query):
