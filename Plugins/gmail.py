@@ -1,6 +1,7 @@
 import smtplib
 import os
 from dotenv import load_dotenv
+import re
 
 load_dotenv(dotenv_path='..\\Data\\.env')
 
@@ -23,8 +24,20 @@ def send_email(reciever_id, subject, body):
         f"{body}"
     ])
     # sending the mail
-    s.sendmail(sender_id, reciever_id, message)
+    try:
+        s.sendmail(sender_id, reciever_id, message)
+    except smtplib.SMTPRecipientsRefused:
+        print("INVALID EMAIL ADDRESS")
+        return False
+    except smtplib.SMTPException:
+        return False
     # terminating the session
     s.quit()
     return True
 
+def check_email(email):
+    verifier = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if re.fullmatch(verifier, email):
+        return True
+    else:
+        return False

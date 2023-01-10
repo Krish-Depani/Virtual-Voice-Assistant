@@ -16,14 +16,15 @@ try:
     # importing modules made for assistant
     from database import *
     from image_generation import generate_image
-    from gmail import send_email
+    from gmail import *
     from API_functionalities import *
     from system_operations import *
     from browsing_functionalities import *
 except (ImportError, SystemError, Exception, KeyboardInterrupt) as e:
     print("ERROR OCCURRED WHILE IMPORTING THE MODULES")
     exit(0)
-    '''
+
+'''
 import os
 import logging
 import pyttsx3
@@ -176,6 +177,9 @@ def main(query):
         elif intent == "email" and "email" in query:
             speak("Type the receiver id : ")
             receiver_id = input()
+            while not check_email(receiver_id):
+                speak("Invalid email id\nType reciever id again : ")
+                receiver_id = input()
             speak("Tell the subject of email")
             subject = record()
             speak("tell the body of email")
