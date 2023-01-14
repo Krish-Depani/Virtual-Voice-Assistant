@@ -32,4 +32,41 @@ To run this program you will require a bunch of API keys. Register your API key 
 - [News API](https://newsapi.org/)
 - [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
 
-Once you have obtained all necessary API keys, navigate to the `Virtual-Voice-Assistant/Data/.env` file and insert the keys into the designated placeholder fields.
+## Installation
+
+Please make sure that `Python` and `pip` are installed on your system before proceeding with the installation.
+
+Open a terminal and navigate to your home directory.
+
+Clone the repository by using the command
+```
+git clone https://github.com/Krish-Depani/Virtual-Voice-Assistant.git
+```
+
+Navigate to the project directory using the command
+```
+cd Virtal-Voice-Assistant
+```
+
+Obtain all necessary API keys and open the file `Virtual-Voice-Assistant/Data/.env` to insert the keys into the designated placeholder fields.
+
+Install all required packages by running the command
+```
+pip install -r requirements.txt
+```
+
+Run the setup script by using the command
+```
+python setup.py
+```
+
+Navigate to the `Virtual-Voice-Assistant/Plugins/` directory and run the below command to start the virtual voice assistant.
+```
+python main.py
+```
+
+You're all set! The virtual voice assistant should be up and running now.
+
+## License
+
+The code in this repository is licensed under the MIT License. This means that you are free to use, modify, and distribute the code, as long as you include the original copyright and license notice. For more information about LICENSE please check [here](https://github.com/Krish-Depani/Virtual-Voice-Assistant/blob/main/LICENSE).
