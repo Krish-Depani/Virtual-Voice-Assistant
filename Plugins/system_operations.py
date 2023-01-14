@@ -115,7 +115,7 @@ class WindowOpt:
 
     def Screen_Shot(self):
         im = ImageGrab.grab()
-        im.save(f'C:\\Users\\Hp\\Pictures\\Screenshots\\ss_{randint(1, 100)}.jpg')
+        im.save(f'../Data/Screenshots/ss_{randint(1, 100)}.jpg')
 
 
 def systemInfo():
