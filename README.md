@@ -31,6 +31,7 @@ To run this program you will require a bunch of API keys. Register your API key 
 - [Wolframaplha API](https://products.wolframalpha.com/api)
 - [News API](https://newsapi.org/)
 - [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
+- [DreamStudio API](https://platform.stability.ai/docs/getting-started/authentication)
 
 ## Installation
 
