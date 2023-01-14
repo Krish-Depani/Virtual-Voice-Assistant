@@ -93,4 +93,4 @@ You're all set! The virtual voice assistant should be up and running now.
 
 ## License
 
-The code in this repository is licensed under the MIT License. This means that you are free to use, modify, and distribute the code, as long as you include the original copyright and license notice. For more information about LICENSE please check [here](https://github.com/Krish-Depani/Virtual-Voice-Assistant/blob/main/LICENSE).
+The code in this repository is licensed under the MIT License. This means that you are free to use, modify, and distribute the code, as long as you include the original copyright and license notice. For more information about LICENSE please click [here](https://github.com/Krish-Depani/Virtual-Voice-Assistant/blob/main/LICENSE).
