@@ -24,3 +24,12 @@ Our virtual voice assistant comes packed with a wide range of features, includin
 - Performing Google search, so you can find the information you need.
 - Playing songs and videos on YouTube, so you can enjoy your favorite music and videos.
 - Showing maps of any city you specify and calculating the distance between two destinations in Google Maps.
+
+## API Keys
+To run this program you will require a bunch of API keys. Register your API key by clicking the following links
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- [Wolframaplha API](https://products.wolframalpha.com/api)
+- [News API](https://newsapi.org/)
+- [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
+
+Once you have obtained all necessary API keys, navigate to the `Virtual-Voice-Assistant/Data/.env` file and insert the keys into the designated placeholder fields.
