@@ -23,7 +23,9 @@ Our virtual voice assistant comes packed with a wide range of features, includin
 - Saving your chat history, so you can refer back to it later.
 - Performing Google search, so you can find the information you need.
 - Playing songs and videos on YouTube, so you can enjoy your favorite music and videos.
-- Showing maps of any city you specify and calculating the distance between two destinations in Google Maps.
+- Showing maps of any city you specify and calculating the distance between two destinations in Google Maps.<br>
+
+NOTE: Please note that in order for the virtual voice assistant to send emails, the option for "Less secure apps" must be enabled within your Gmail account. To allow access you can click [here](https://myaccount.google.com/lesssecureapps).
 
 ## API Keys
 To run this program you will require a bunch of API keys. Register your API key by clicking the following links
