@@ -53,11 +53,6 @@ cd Virtal-Voice-Assistant
 
 Obtain all necessary API keys and open the file `Virtual-Voice-Assistant/Data/.env` to insert the keys into the designated placeholder fields.
 
-Install all required packages by running the command
-```
-pip install -r requirements.txt
-```
-
 Run the setup script by using the command
 ```
 python setup.py
