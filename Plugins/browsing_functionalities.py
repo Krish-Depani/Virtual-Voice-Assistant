@@ -3,7 +3,7 @@ import re
 import wikipedia
 import speedtest
 from youtubesearchpython import VideosSearch
-from Plugins import websites
+import websites
 
 
 def googleSearch(query):
