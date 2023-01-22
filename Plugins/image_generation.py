@@ -1,5 +1,4 @@
 import io
-import warnings
 from dotenv import load_dotenv
 import os
 from PIL import Image
@@ -26,9 +25,9 @@ def generate_image(text):
     for resp in answers:
         for artifact in resp.artifacts:
             if artifact.finish_reason == generation.FILTER:
-                warnings.warn(
-                    "Your request activated the API's safety filters and could not be processed."
+                print("WARNING: Your request activated the API's safety filters and could not be processed."
                     "Please modify the prompt and try again.")
-            if artifact.type == generation.ARTIFACT_IMAGE:
+                return
+            elif artifact.type == generation.ARTIFACT_IMAGE:
                 img = Image.open(io.BytesIO(artifact.binary))
                 img.show()
