@@ -2,6 +2,7 @@
 
 #### Welcome to Virtual Voice Assisant, a virtual voice assistant that can help you with a variety of tasks. This project utilizes machine learning and natural language processing to create a natural and intuitive experience for users. With Virtual Voice Assistant, you can easily interact with your computer by simply speaking to it.
 #### For a cool demo of this project watch this [YouTube video](https://www.youtube.com/watch?v=ErR-vdYssv0)
+#### For more details checkout [Project Report](https://github.com/Krish-Depani/Virtual-Voice-Assistant/blob/main/Project%20Report%20GitHub.pdf)
 
 ## Features
 Our virtual voice assistant comes packed with a wide range of features, including:
